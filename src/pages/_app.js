@@ -6,7 +6,7 @@ export default function App({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
 
   return (
-    //! Redud (<Provider store={store})
+    //! Redux (<Provider store={store})
     <Provider store={store}>{getLayout(<Component {...pageProps} />)}</Provider>
   );
 }

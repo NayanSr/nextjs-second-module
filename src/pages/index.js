@@ -1,12 +1,18 @@
 import Head from "next/head";
 import RootLayout from "@/components/Layouts/RootLayout";
-import Banner from "@/components/UI/Banner";
+// import Banner from "@/components/UI/Banner";
 import AllNews from "@/components/UI/AllNews";
-import { useGetNewsesQuery } from "@/redux/api/api";
+import { useGetNewsesQuery } from "@/redux/api/apiSlice";
+import dynamic from "next/dynamic";
 
 const HomePage = ({ allNews }) => {
   //! Redux
   const { data, isLoading, isError, error } = useGetNewsesQuery();
+
+  const DynamicBanner = dynamic(() => import("@/components/UI/Banner"), {
+    loading: () => <h2>Loading...</h2>,
+    ssr: false, //! become ssg(server site generation)
+  });
 
   return (
     <>
@@ -19,7 +25,7 @@ const HomePage = ({ allNews }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Banner />
+      <DynamicBanner />
       {/* //! Resux */}
       <AllNews allNews={data} />
     </>
