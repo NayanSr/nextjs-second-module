@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 
 const HomePage = ({ allNews }) => {
   //! Redux
-  const { data, isLoading, isError, error } = useGetNewsesQuery();
+  // const { data, isLoading, isError, error } = useGetNewsesQuery();
 
   const DynamicBanner = dynamic(() => import("@/components/UI/Banner"), {
     loading: () => <h2>Loading...</h2>,
@@ -27,7 +27,7 @@ const HomePage = ({ allNews }) => {
       </Head>
       <DynamicBanner />
       {/* //! Resux */}
-      <AllNews allNews={data} />
+      <AllNews allNews={allNews} />
     </>
   );
 };
@@ -39,10 +39,10 @@ HomePage.getLayout = function getLayout(page) {
 
 // export const getStaticProps = async () => {    //! use for SSG
 export const getServerSideProps = async () => {
-  const res = await fetch("http://localhost:5000/news");
+  const res = await fetch("http://localhost:3000/api/news");
   const data = await res.json();
   return {
-    props: { allNews: data },
+    props: { allNews: data.data },
     // revalidate: 30,  //! use for SSG
   };
 };
