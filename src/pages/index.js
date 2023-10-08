@@ -5,8 +5,9 @@ import AllNews from "@/components/UI/AllNews";
 import { useGetNewsesQuery } from "@/redux/api/api";
 
 const HomePage = ({ allNews }) => {
+  //! Redux
   const { data, isLoading, isError, error } = useGetNewsesQuery();
-  console.log(data);
+
   return (
     <>
       <Head>
@@ -19,7 +20,8 @@ const HomePage = ({ allNews }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Banner />
-      <AllNews allNews={allNews} />
+      {/* //! Resux */}
+      <AllNews allNews={data} />
     </>
   );
 };
