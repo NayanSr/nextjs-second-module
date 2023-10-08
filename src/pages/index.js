@@ -37,12 +37,12 @@ HomePage.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
 
-// export const getStaticProps = async () => {    //! use for SSG
-export const getServerSideProps = async () => {
+// export const getServerSideProps = async () => {    //! use for SSR
+export const getStaticProps = async () => {
   const res = await fetch("http://localhost:3000/api/news");
   const data = await res.json();
   return {
     props: { allNews: data.data },
-    // revalidate: 30,  //! use for SSG
+    revalidate: 30, //! use for SSG
   };
 };
